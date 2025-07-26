@@ -12,7 +12,7 @@ const app = express();
 
 
 const corsOptions = {
-  origin: ['http://localhost:5173'], 
+  origin: ['https://fair-split-ml4x.vercel.app'], 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
