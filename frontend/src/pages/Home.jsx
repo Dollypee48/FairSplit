@@ -12,7 +12,7 @@ export default function Home() {
         <div className="bg-green-800 bg-opacity-70 p-8 rounded max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-4">Split Bills. Stay Friends.</h1>
           <p className="text-lg mb-6 max-w-xl mx-auto">
-            FairSplit makes it effortless to share expenses with roommates, travel buddies, or group members—without the awkward conversations.
+            FairSplit makes it effortless to share expenses with roommates, travel buddies, or group members without the awkward conversations.
           </p>
           <Link
             to="/split"

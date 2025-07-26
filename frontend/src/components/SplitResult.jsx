@@ -7,44 +7,56 @@ export default function SplitResult({ data }) {
     title,
     totalAmount,
     currency,
-    participants = [],
     splitType,
     customShares = {},
     members = [],
   } = data;
 
   return (
-    <div className="bg-white p-6 rounded shadow">
-      <h2 className="text-2xl font-bold mb-4">Split Summary</h2>
-      <p className="mb-2">
-        <strong>Title:</strong> {title}
-      </p>
-      <p className="mb-2">
-        <strong>Total Amount:</strong> {currency}
-        {totalAmount}
-      </p>
-      <p className="mb-2">
-        <strong>Split Type:</strong> {splitType}
-      </p>
+    <div className="bg-gradient-to-br from-white to-gray-50 border border-gray-200 rounded-2xl shadow-lg p-6 max-w-3xl mx-auto">
+      <h2 className="text-3xl font-extrabold text-gray-800 mb-4 border-b pb-2">
+        💸 Split Summary
+      </h2>
 
-      <h3 className="text-xl font-semibold mt-4 mb-2">Participants</h3>
-      <ul className="list-disc pl-6 space-y-1">
-        {members.map((member, index) => (
-          <li key={index}>
-            {member.name}: {currency}
-            {member.amount.toFixed(2)}
-          </li>
-        ))}
-      </ul>
+      <div className="space-y-3 text-gray-700">
+        <p>
+          <span className="font-semibold">📌 Title:</span> {title}
+        </p>
+        <p>
+          <span className="font-semibold">💰 Total Amount:</span> {currency}
+          {Number(totalAmount).toFixed(2)}
+        </p>
+        <p>
+          <span className="font-semibold">🔀 Split Type:</span> {splitType}
+        </p>
+      </div>
+
+      <div className="mt-6">
+        <h3 className="text-xl font-semibold text-green-700 mb-2">👥 Participants & Amounts</h3>
+        <ul className="bg-green-50 rounded-lg p-4 divide-y divide-green-100">
+          {members.map((member, index) => (
+            <li key={index} className="py-2 flex justify-between">
+              <span className="font-medium">{member.name}</span>
+              <span className="text-green-800 font-semibold">
+                {currency}
+                {member.amount.toFixed(2)}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       {splitType === 'custom' && (
-        <div className="mt-4">
-          <h3 className="text-lg font-medium">Custom Shares:</h3>
-          <ul className="list-disc pl-6">
+        <div className="mt-6">
+          <h3 className="text-lg font-semibold text-purple-700 mb-2">⚙️ Custom Shares</h3>
+          <ul className="bg-purple-50 rounded-lg p-4 divide-y divide-purple-100">
             {Object.entries(customShares).map(([name, amount], index) => (
-              <li key={index}>
-                {name}: {currency}
-                {Number(amount).toFixed(2)}
+              <li key={index} className="py-2 flex justify-between">
+                <span>{name}</span>
+                <span className="text-purple-800 font-medium">
+                  {currency}
+                  {Number(amount).toFixed(2)}
+                </span>
               </li>
             ))}
           </ul>

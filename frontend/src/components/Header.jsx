@@ -11,6 +11,7 @@ export default function Header() {
 
           <Link to="/split" className="hover:underline">Split</Link>
           <Link to="/history" className="hover:underline">History</Link>
+          <Link to="/about" className="hover:underline">About</Link>
 
         </nav>
       </div>

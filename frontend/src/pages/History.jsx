@@ -65,19 +65,19 @@ export default function History() {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-green-600">Expense History</h1>
-        <div className="space-x-4">
+    <div className="p-6 max-w-5xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <h1 className="text-3xl font-bold text-green-700 tracking-tight">Expense History</h1>
+        <div className="flex gap-3">
           <button
             onClick={downloadPDF}
-            className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow transition"
           >
-            Download 
+            Download PDF
           </button>
           <button
             onClick={clearHistory}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg shadow transition"
           >
             Clear History
           </button>
@@ -85,49 +85,49 @@ export default function History() {
       </div>
 
       {expenses.length === 0 ? (
-        <p className="text-gray-600">No expenses yet.</p>
+        <div className="text-center text-gray-600 mt-12 text-lg">
+          No expenses have been recorded yet.
+        </div>
       ) : (
         <ul className="space-y-6">
           {expenses.map((exp) => (
             <li
               key={exp._id}
-              className="border border-green-200 p-5 rounded-lg bg-white shadow"
+              className="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-md transition p-6"
             >
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {exp.title}
-              </h2>
-
-              <div className="mb-2">
-                <span className="text-lg font-semibold text-gray-800">Total:</span>{" "}
-                <span className="text-green-700 font-medium">
-                  {getSymbol(exp.currency)}
-                  {exp.totalAmount?.toLocaleString()}
-                </span>
+              <div className="flex flex-col md:flex-row justify-between mb-3">
+                <h2 className="text-xl font-semibold text-gray-800">{exp.title}</h2>
+                <div className="text-green-700 font-bold text-lg">
+                  {getSymbol(exp.currency)}{exp.totalAmount?.toLocaleString()}
+                </div>
               </div>
 
-              <div className="mb-2">
-                <span className="text-sm text-gray-600">Split Type:</span>{" "}
-                <span className="capitalize font-medium">{exp.splitType}</span>
-              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700">
+                <div>
+                  <span className="font-medium text-gray-600">Split Type:</span>{" "}
+                  <span className="capitalize">{exp.splitType}</span>
+                </div>
 
-              <div className="mb-2">
-                <span className="text-sm text-gray-600">Participants:</span>{" "}
-                <span className="text-sm text-gray-800">{exp.participants?.join(", ")}</span>
-              </div>
+                <div>
+                  <span className="font-medium text-gray-600">Participants:</span>{" "}
+                  <span>{exp.participants?.join(", ")}</span>
+                </div>
 
-              <div className="mb-4 text-sm text-gray-500">
-                {new Date(exp.createdAt).toLocaleString()}
+                <div className="text-gray-500">
+                  {new Date(exp.createdAt).toLocaleString()}
+                </div>
               </div>
 
               {exp.customShares && Object.keys(exp.customShares).length > 0 && (
-                <div className="bg-green-50 p-3 rounded-md">
-                  <p className="text-sm font-medium text-gray-700 mb-2">Custom Shares:</p>
-                  {Object.entries(exp.customShares).map(([name, amt]) => (
-                    <div key={name} className="text-gray-700 text-sm">
-                      {name}: {getSymbol(exp.currency)}
-                      {amt.toLocaleString()}
-                    </div>
-                  ))}
+                <div className="mt-4 bg-green-50 rounded-lg p-4">
+                  <p className="font-medium text-sm text-green-800 mb-2">Custom Shares:</p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-gray-800">
+                    {Object.entries(exp.customShares).map(([name, amt]) => (
+                      <li key={name}>
+                        {name}: {getSymbol(exp.currency)}{amt.toLocaleString()}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               )}
             </li>

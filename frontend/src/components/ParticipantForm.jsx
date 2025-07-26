@@ -15,36 +15,46 @@ export default function ParticipantForm({ participants, setParticipants }) {
   }
 
   return (
-    <div className="mb-6">
-      <label className="block font-semibold mb-2">Participants</label>
-      <div className="flex gap-2 mb-2">
+    <div className="mb-8">
+      <label className="block text-lg font-medium text-gray-700 mb-3">
+        Add Participants
+      </label>
+
+      <div className="flex gap-3 mb-4">
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Enter name"
-          className="border border-gray-300 rounded px-3 py-2 w-full"
+          placeholder="Enter participant name"
+          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
         />
         <button
           onClick={handleAdd}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+          className="bg-green-600 hover:bg-green-700 text-white font-medium px-5 py-2 rounded-lg transition duration-200"
         >
           Add
         </button>
       </div>
-      <ul className="flex flex-wrap gap-2">
-        {participants.map((p, i) => (
-          <li key={i} className="bg-green-100 text-green-800 px-3 py-1 rounded-full">
-            {p}
-            <button
-              onClick={() => handleRemove(p)}
-              className="ml-2 text-red-500"
+
+      {participants.length > 0 && (
+        <ul className="flex flex-wrap gap-2">
+          {participants.map((p, i) => (
+            <li
+              key={i}
+              className="flex items-center bg-green-100 text-green-800 px-4 py-1.5 rounded-full shadow-sm"
             >
-              ×
-            </button>
-          </li>
-        ))}
-      </ul>
+              <span className="mr-2">{p}</span>
+              <button
+                onClick={() => handleRemove(p)}
+                className="text-red-500 hover:text-red-700 font-bold text-lg leading-none"
+                title="Remove"
+              >
+                ×
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
