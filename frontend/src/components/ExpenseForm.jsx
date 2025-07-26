@@ -31,7 +31,7 @@ export default function ExpenseForm({
     };
 
     try {
-      const res = await axios.post('http://localhost:5000/api/expenses', data);
+      const res = await axios.post('https://fair-split-nine.vercel.app/api/expenses', data);
       setResult(res.data);
     } catch (err) {
       console.error('Error submitting expense:', err);

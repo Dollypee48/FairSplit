@@ -12,7 +12,7 @@ export default function History() {
 
   const fetchExpenses = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/expenses");
+      const res = await axios.get("https://fair-split-nine.vercel.app/api/expenses");
       setExpenses(res.data);
     } catch (err) {
       console.error("Error fetching history:", err);
@@ -22,7 +22,7 @@ export default function History() {
   const clearHistory = async () => {
     if (window.confirm("Are you sure you want to clear all history?")) {
       try {
-        await axios.delete("http://localhost:5000/api/expenses/clear");
+        await axios.delete("https://fair-split-nine.vercel.app/api/expenses/clear");
         setExpenses([]);
       } catch (err) {
         console.error("Error clearing history:", err);
